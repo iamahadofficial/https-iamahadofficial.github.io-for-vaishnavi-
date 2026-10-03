@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Six Little Truths ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #eaf8f5;
+            background-image: linear-gradient(#d1ebe6 1px, transparent 1px), linear-gradient(90deg, #d1ebe6 1px, transparent 1px);
+            background-size: 50px 50px; background-position: center top;
+            font-family: 'Montserrat', sans-serif; color: #1a3c40; 
+            display: flex; justify-content: center; overflow-x: hidden;
+            min-height: 100vh;
+            user-select: none; /* Prevent text selection while scratching */
+        }
+
+        .main-container { 
+            width: 100%; max-width: 480px; padding: 40px 20px 100px 20px; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+
+        /* Header Styles */
+        .top-tag { color: #ff7f50; font-size: 11px; letter-spacing: 2px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: 32px; color: #1a3c40; margin-bottom: 5px; text-align: center; }
+        .subtitle { font-family: 'Caveat', cursive; font-size: 22px; color: #157a6e; margin-bottom: 5px; text-align: center; }
+        .flower-icon { font-size: 28px; margin-bottom: 25px; }
+
+        /* Grid for Scratch Cards */
+        .scratch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Scratch Card Wrapper */
+        .card-wrapper {
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            aspect-ratio: 4/5; /* Rectangular shape */
+            overflow: hidden;
+        }
+
+        /* Card Content (Hidden underneath) */
+        .card-content {
+            padding: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        .card-number {
+            color: #ff7f50;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a3c40;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: #5a6a72;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* The Canvas layer to scratch off */
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            touch-action: none; /* Prevents scrolling while scratching */
+            border-radius: 12px;
+            transition: opacity 0.5s ease; /* Fade out effect */
+        }
+
+        /* Bottom Section Elements */
+        .count-text {
+            font-family: 'Caveat', cursive;
+            color: #5a8d87;
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .next-btn {
+            background-color: #009688;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 150, 136, 0.3);
+            transition: transform 0.2s;
+            width: 80%;
+            max-width: 250px;
+        }
+        .next-btn:active { transform: scale(0.95); }
+
+        /* Floating Music Player (Bottom Right) */
+        .music-player {
+            position: fixed; bottom: 20px; right: 20px; background: white; padding: 8px 15px; border-radius: 30px;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #1a3c40; z-index: 20; cursor: pointer;
+        }
+        .play-btn {
+            background-color: #009688; color: white; width: 28px; height: 28px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 12px; padding-left: 2px;
+        }
+
+        /* Adjustments for smaller phones */
+        @media (max-width: 380px) {
+            .card-title { font-size: 16px; }
+            .card-desc { font-size: 10px; }
+            .scratch-grid { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Header -->
+        <div class="top-tag">✦ SIX LITTLE TRUTHS</div>
+        <h1 class="main-title">scratch these open</h1>
+        <p class="subtitle">rub each one — there's something under it ✿</p>
+        <div class="flower-icon">🌷</div>
+
+        <!-- 3x2 Grid for Scratch Cards -->
+        <div class="scratch-grid">
+            
+            <!-- Card 1 -->
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-number">01</div>
+                    <div class="card-title">you're Talented</div>
+                    <div class="card-desc">तू माझी बहिण आहेस म्हणून नाही, तर माझी सगळ्यात जवळची व्यक्ती आहेस म्हणून तू खास आहेस. ❤️
+तुझ्यासोबत भांडणं कितीही झाली तरी शेवटी तूच माझी favourite आहेस. 🥰</div>
+                </div>
+                <canvas class="scratch-canvas" width="200" height="250"></canvas>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-number">02</div>
+                    <div class="card-title">you're great</div>
+                    <div class="card-desc">तुझं मन खरंच खूप चांगलं आहे, फक्त तू ते सगळ्यांना दाखवत नाहीस. ❤️
+तुझ्यासारखी बहिण मिळणं ही माझ्यासाठी खरंच भाग्याची गोष्ट आहे. 🫶</div>
+                </div>
+                <canvas class="scratch-canvas" width="200" height="250"></canvas>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-number">03</div>
+                    <div class="card-title">you're my little sister</div>
+                    <div class="card-desc">कितीही मोठी झालीस तरी माझ्यासाठी तू तीच छोटीशी वेडी बहिण राहशील. ❤️
+आणि तुझ्या प्रत्येक सुखात मला मनापासून आनंद होतो. 🥰</div>
+                </div>
+                <canvas class="scratch-canvas" width="200" height="250"></canvas>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-number">04</div>
+                    <div class="card-title">you're my favourite</div>
+                    <div class="card-desc">तू कधी कधी खूप त्रास देतेस, पण तुझ्याशिवाय घरचं घर वाटत नाही. 😂❤️
+खरं सांगायचं तर तुझी सवय मला खूप जास्त झालीये. 🥹</div>
+                </div>
+                <canvas class="scratch-canvas" width="200" height="250"></canvas>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-number">05</div>
+                    <div class="card-title">you'r chhoti</div>
+                    <div class="card-desc">तुझ्यावर कितीही राग आला तरी जास्त वेळ तुझ्याशी बोलणं बंद ठेवता येत नाही. 😂
+कारण शेवटी तू माझी बहिण आहेस आणि माझ्यासाठी खूप खास आहेस. ❤️</div>
+                </div>
+                <canvas class="scratch-canvas" width="200" height="250"></canvas>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-number">06</div>
+                    <div class="card-title">my last wish</div>
+                    <div class="card-desc">जगात कुठेही गेलीस तरी तुझ्या चेहऱ्यावरचं हसू असंच कायम राहावं. 🥰
+आयुष्यात तुला जे हवंय ते सगळं मिळावं, एवढीच माझी इच्छा आहे. ❤️</div>
+                </div>
+                <canvas class="scratch-canvas" width="200" height="250"></canvas>
+            </div>
+
+        </div>
+
+        <!-- Progress and Button -->
+        <div class="count-text" id="uncoveredCount">0 of 6 uncovered</div>
+        <button class="next-btn" onclick="goToNextPage()">read the letter →</button>
+    </div>
+
+    <!-- Floating Music Player -->
+    <div class="music-player" onclick="toggleMusic(event)">
+        <div class="play-btn" id="playBtnIcon">▶</div>
+        Our Song <span style="color: #ff9a00; font-size: 14px;">ılıı.</span>
+    </div>
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <script>
+        // === Music Player Logic ===
+        const music = document.getElementById("bg-music");
+        const playBtn = document.getElementById("playBtnIcon");
+        let isPlaying = false;
+
+        window.onload = function() {
+            const savedTime = sessionStorage.getItem("savedMusicTime");
+            const wasPlaying = sessionStorage.getItem("isMusicPlaying");
+
+            if (savedTime !== null) {
+                music.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = "||";
+                    playBtn.style.paddingLeft = "0px";
+                }).catch((error) => {
+                    isPlaying = false;
+                    playBtn.innerHTML = "▶";
+                });
+            }
+        };
+
+        function toggleMusic(event) {
+            event.stopPropagation();
+            if(isPlaying) {
+                music.pause(); 
+                playBtn.innerHTML = "▶"; 
+                playBtn.style.paddingLeft = "2px";
+            } else {
+                music.play(); 
+                playBtn.innerHTML = "||"; 
+                playBtn.style.paddingLeft = "0px";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function goToNextPage() {
+            sessionStorage.setItem("savedMusicTime", music.currentTime);
+            sessionStorage.setItem("isMusicPlaying", !music.paused);
+            window.location.href = "page6.html"; // Agle page ka link
+        }
+
+        // === Scratch Card Logic ===
+        const canvases = document.querySelectorAll('.scratch-canvas');
+        let uncoveredCards = 0;
+        const countText = document.getElementById('uncoveredCount');
+
+        canvases.forEach(canvas => {
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            
+            // Draw the green cover
+            ctx.fillStyle = '#4db6ac'; // Teal/Green color
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add "scratch" text in the middle
+            ctx.fillStyle = 'rgba(26, 60, 64, 0.3)';
+            ctx.font = '16px Montserrat';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('scratch', canvas.width / 2, canvas.height / 2);
+
+            // Function to get accurate mouse/touch position
+            function getPosition(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                // Calculate scale factor between canvas internal size and display size
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                return {
+                    x: (clientX - rect.left) * scaleX,
+                    y: (clientY - rect.top) * scaleY
+                };
+            }
+
+            function scratch(x, y) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 25, 0, Math.PI * 2); // 25 is the brush size
+                ctx.fill();
+            }
+
+            function handleStart(e) {
+                isDrawing = true;
+                const pos = getPosition(e);
+                scratch(pos.x, pos.y);
+            }
+
+            function handleMove(e) {
+                if (!isDrawing) return;
+                e.preventDefault(); // Prevents scrolling on touch screens while scratching
+                const pos = getPosition(e);
+                scratch(pos.x, pos.y);
+            }
+
+            function handleEnd() {
+                isDrawing = false;
+                checkReveal();
+            }
+
+            // Check if enough area is scratched to reveal the card
+            function checkReveal() {
+                // To avoid performance issues, we check sample points
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+                let transparentPixels = 0;
+                
+                // Jump 4 bytes (RGBA) to check transparency (Alpha channel)
+                for (let i = 3; i < imageData.length; i += 4 * 10) { 
+                    if (imageData[i] < 128) {
+                        transparentPixels++;
+                    }
+                }
+                
+                const totalSamplePixels = imageData.length / (4 * 10);
+                const percentCleared = (transparentPixels / totalSamplePixels) * 100;
+
+                // If more than 40% is scratched, fade out completely
+                if (percentCleared > 40 && !canvas.classList.contains('cleared')) {
+                    canvas.classList.add('cleared');
+                    canvas.style.opacity = '0';
+                    setTimeout(() => {
+                        canvas.style.display = 'none'; // Remove it entirely after fade out
+                    }, 500);
+                    
+                    // Update the counter
+                    uncoveredCards++;
+                    if(uncoveredCards === 6) {
+                        countText.innerText = "that's all six ✿";
+                    } else {
+                        countText.innerText = `${uncoveredCards} of 6 uncovered`;
+                    }
+                }
+            }
+
+            // Event Listeners (Mouse)
+            canvas.addEventListener('mousedown', handleStart);
+            canvas.addEventListener('mousemove', handleMove);
+            canvas.addEventListener('mouseup', handleEnd);
+            canvas.addEventListener('mouseleave', handleEnd);
+
+            // Event Listeners (Touch)
+            canvas.addEventListener('touchstart', handleStart, {passive: false});
+            canvas.addEventListener('touchmove', handleMove, {passive: false});
+            canvas.addEventListener('touchend', handleEnd);
+        });
+    </script>
+</body>
+</html>

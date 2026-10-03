@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Memory Wall ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #eaf8f5;
+            background-image: linear-gradient(#d1ebe6 1px, transparent 1px), linear-gradient(90deg, #d1ebe6 1px, transparent 1px);
+            background-size: 50px 50px; background-position: center top;
+            font-family: 'Montserrat', sans-serif; color: #1a3c40; 
+            display: flex; justify-content: center; overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .main-container { 
+            width: 100%; max-width: 420px; padding: 40px 20px 100px 20px; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+
+        /* Header Styles */
+        .top-tag { color: #ff7f50; font-size: 11px; letter-spacing: 2px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: 32px; color: #1a3c40; margin-bottom: 5px; text-align: center; }
+        .subtitle { font-family: 'Caveat', cursive; font-size: 22px; color: #157a6e; margin-bottom: 5px; text-align: center; }
+        .flower-icon { font-size: 16px; color: #009688; margin-bottom: 25px; }
+
+        /* Grid for Memory Wall */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        /* 3D Flip Card Container */
+        .card-container {
+            background-color: transparent;
+            width: 100%;
+            aspect-ratio: 4/5; /* Perfect rectangle shape */
+            perspective: 1000px; /* 3D effect ke liye */
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d; /* 3D rotate allow karne ke liye */
+        }
+
+        /* Jab box click hoga tab ye class add hogi */
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Front and Back of the Card */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Piche ka hissa hide karne ke liye */
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* Card Front Image */
+        .card-front img {
+            width: 100%;
+            height: calc(100% - 20px);
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .card-front .small-flower {
+            font-size: 12px;
+            color: #009688;
+            margin-top: 5px;
+        }
+
+        /* Card Back Texture (Lined Paper) */
+        .card-back {
+            transform: rotateY(180deg);
+            justify-content: center;
+            background-color: #fffdf9;
+            /* Lined paper effect */
+            background-image: repeating-linear-gradient(transparent, transparent 28px, #e0ecea 28px, #e0ecea 29px);
+            background-position: top;
+            padding: 20px 15px;
+        }
+
+        .card-back p {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            color: #2b5555;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        /* The Orange Pin */
+        .pin {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background-color: #ff9a00;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset -2px -2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* Bottom Section Elements */
+        .hint-text {
+            font-family: 'Caveat', cursive;
+            color: #5a8d87;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .next-btn {
+            background-color: #009688;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 150, 136, 0.3);
+            transition: transform 0.2s;
+            width: 80%;
+            max-width: 250px;
+        }
+        .next-btn:active { transform: scale(0.95); }
+
+        /* Floating Music Player (Bottom Right) */
+        .music-player {
+            position: fixed; bottom: 20px; right: 20px; background: white; padding: 8px 15px; border-radius: 30px;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #1a3c40; z-index: 20; cursor: pointer;
+        }
+        .play-btn {
+            background-color: #009688; color: white; width: 28px; height: 28px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 12px; padding-left: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Header -->
+        <div class="top-tag">✦ THE MEMORY WALL</div>
+        <h1 class="main-title">flip one over</h1>
+        <p class="subtitle">every photo has something written on the back</p>
+        <div class="flower-icon">✿</div>
+
+        <!-- 3x2 Grid for Photos -->
+        <div class="memory-grid">
+            
+            <!-- Photo 1 -->
+            <div class="card-container" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="pin"></div>
+                        <img src="wall1.jpg" alt="Memory 1">
+                        <div class="small-flower">✿</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="pin"></div>
+                        <p>Mazhi Ladki Bahin 🥰</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="card-container" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="pin"></div>
+                        <img src="wall2.jpg" alt="Memory 2">
+                        <div class="small-flower">✿</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="pin"></div>
+                        <p>Ha Bhau Tuzhya Kayam Sobt rahil.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="card-container" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="pin"></div>
+                        <img src="wall3.jpg" alt="Memory 3">
+                        <div class="small-flower">✿</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="pin"></div>
+                        <p>Nehmi Hasat Raha. </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="card-container" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="pin"></div>
+                        <img src="wall4.jpg" alt="Memory 4">
+                        <div class="small-flower">✿</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="pin"></div>
+                        <p>Tuzhya sarv iccha purn hovo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="card-container" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="pin"></div>
+                        <img src="wall5.jpg" alt="Memory 5">
+                        <div class="small-flower">✿</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="pin"></div>
+                        <p>Mazhya bahini la sarv sukh milo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="card-container" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="pin"></div>
+                        <img src="wall6.jpg" alt="Memory 6">
+                        <div class="small-flower">✿</div>
+                    </div>
+                    <div class="card-back">
+                        <div class="pin"></div>
+                        <p>Mi Tuzhya kayam pathishi ahe.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End Grid -->
+
+        <!-- Bottom Controls -->
+        <div class="hint-text">tap a photo to flip it ✿</div>
+        
+        <button class="next-btn" onclick="goToNextPage()">scratch to reveal →</button>
+    </div>
+
+    <!-- Floating Music Player -->
+    <div class="music-player" onclick="toggleMusic(event)">
+        <div class="play-btn" id="playBtnIcon">▶</div>
+        Our Song <span style="color: #ff9a00; font-size: 14px;">ılıı.</span>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <script>
+        const music = document.getElementById("bg-music");
+        const playBtn = document.getElementById("playBtnIcon");
+        let isPlaying = false;
+
+        // Page load hone par gaana continue karne ka logic
+        window.onload = function() {
+            const savedTime = sessionStorage.getItem("savedMusicTime");
+            const wasPlaying = sessionStorage.getItem("isMusicPlaying");
+
+            if (savedTime !== null) {
+                music.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = "||";
+                    playBtn.style.paddingLeft = "0px";
+                }).catch((error) => {
+                    isPlaying = false;
+                    playBtn.innerHTML = "▶";
+                });
+            }
+        };
+
+        // Music play/pause toggle
+        function toggleMusic(event) {
+            event.stopPropagation();
+            if(isPlaying) {
+                music.pause(); 
+                playBtn.innerHTML = "▶"; 
+                playBtn.style.paddingLeft = "2px";
+            } else {
+                music.play(); 
+                playBtn.innerHTML = "||"; 
+                playBtn.style.paddingLeft = "0px";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Next page par jane se pehle time save karna
+        function goToNextPage() {
+            sessionStorage.setItem("savedMusicTime", music.currentTime);
+            sessionStorage.setItem("isMusicPlaying", !music.paused);
+            window.location.href = "page5.html"; // Agle scratch card wale page ka link
+        }
+    </script>
+</body>
+</html>

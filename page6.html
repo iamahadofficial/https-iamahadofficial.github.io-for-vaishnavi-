@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Note For You ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #eaf8f5;
+            background-image: linear-gradient(#d1ebe6 1px, transparent 1px), linear-gradient(90deg, #d1ebe6 1px, transparent 1px);
+            background-size: 50px 50px; background-position: center top;
+            font-family: 'Montserrat', sans-serif; color: #1a3c40; 
+            display: flex; justify-content: center; overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .main-container { 
+            width: 100%; max-width: 500px; padding: 30px 15px 100px 15px; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+
+        .top-tag { 
+            color: #009688; font-size: 11px; letter-spacing: 2px; font-weight: 700; 
+            padding: 8px 20px; border: 2px dashed #009688; border-radius: 20px;
+            margin-bottom: 25px; text-transform: uppercase; background: white;
+        }
+
+        .header-note {
+            position: relative; background: white; padding: 10px 40px;
+            background-image: linear-gradient(#e0ecea 1px, transparent 1px), linear-gradient(90deg, #e0ecea 1px, transparent 1px);
+            background-size: 15px 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px;
+        }
+        .header-note h1 { font-family: 'Playfair Display', serif; font-size: 24px; color: #1a3c40; }
+        .tape-blue { position: absolute; height: 18px; width: 70px; background-color: #90dbcb; opacity: 0.9; }
+        .tape-top-left { top: -8px; left: -20px; transform: rotate(-5deg); }
+        .tape-top-right { top: -8px; right: -20px; transform: rotate(5deg); }
+
+        .letter-container {
+            position: relative; width: 100%; background-color: #fffdf9;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08); border-radius: 2px;
+            display: flex; padding-top: 40px; padding-bottom: 40px;
+            background-image: repeating-linear-gradient(transparent, transparent 39px, #e0ecea 39px, #e0ecea 40px);
+            background-position: top 40px center;
+        }
+
+        .tape-orange {
+            position: absolute; top: -10px; left: 20px; height: 25px; width: 80px;
+            background-color: #ffaa55; transform: rotate(-3deg); z-index: 10;
+            display: flex; justify-content: space-evenly; align-items: center;
+        }
+        .tape-orange::before, .tape-orange::after, .tape-orange span {
+            content: ''; width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%;
+        }
+
+        .holes-column {
+            width: 40px; display: flex; flex-direction: column; align-items: center; gap: 32px;
+            border-right: 1px solid #f0b5b5; padding-top: 15px;
+        }
+        .hole {
+            width: 12px; height: 12px; background-color: #eaf8f5; 
+            border-radius: 50%; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .text-column { flex-grow: 1; padding: 0 25px 0 20px; }
+        .text-column p {
+            font-family: 'Caveat', cursive; font-size: 22px; color: #2b5555;
+            line-height: 40px; font-weight: 600; margin-bottom: 20px;
+        }
+        .greeting { font-size: 26px !important; color: #009688 !important; }
+        .sign-off { margin-top: 40px; margin-bottom: 5px !important; }
+        .signature {
+            font-size: 28px !important; color: #009688 !important; display: inline-block;
+            border-bottom: 2px solid #009688; line-height: 30px !important; padding-bottom: 5px;
+        }
+
+        .image-cluster { display: flex; flex-direction: column; align-items: center; margin: 30px 0; }
+        .cluster-top { display: flex; gap: 10px; margin-bottom: -15px; }
+        .cluster-img {
+            background: white; padding: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 90px; height: 90px; object-fit: cover; border-radius: 2px;
+        }
+        .img-1 { transform: rotate(-5deg); }
+        .img-2 { transform: rotate(4deg); }
+        .img-3 { width: 100px; height: 100px; transform: rotate(-2deg); z-index: 2; margin-left: -10px; }
+
+        .tiny-cat { position: absolute; bottom: 10px; right: 20px; width: 30px; opacity: 0.8; }
+
+        /* PLAY AGAIN BUTTON */
+        .play-again-btn {
+            background-color: transparent; color: #009688; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; font-weight: 600; padding: 12px 25px; border: 2px solid #009688;
+            border-radius: 30px; cursor: pointer; margin-top: 35px; transition: all 0.3s;
+        }
+        .play-again-btn:hover {
+            background-color: #009688; color: white;
+        }
+        .play-again-btn:active { transform: scale(0.95); }
+
+        .music-player {
+            position: fixed; bottom: 20px; right: 20px; background: white; padding: 8px 15px; border-radius: 30px;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #1a3c40; z-index: 20; cursor: pointer;
+        }
+        .play-btn {
+            background-color: #009688; color: white; width: 28px; height: 28px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 12px; padding-left: 2px;
+        }
+
+        @media (max-width: 400px) {
+            .text-column p { font-size: 20px; line-height: 40px; }
+            .holes-column { width: 30px; }
+            .text-column { padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <div class="top-tag">✿ one last thing ✿</div>
+
+        <div class="header-note">
+            <div class="tape-blue tape-top-left"></div>
+            <div class="tape-blue tape-top-right"></div>
+            <h1>A Note For You</h1>
+        </div>
+
+        <div class="letter-container">
+            <div class="tape-orange"><span></span></div>
+            
+            <div class="holes-column">
+                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+                <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+            </div>
+
+            <div class="text-column">
+                <p class="greeting">Hey Vaishnavi,</p>
+                
+                <p>I’m not always good at saying these things out loud, so I thought I’d make you a little page instead — with our memories, our fights, our laughs, and a few things I actually mean.</p>
+                
+                <p>Thank you for all the years of being there, for annoying me, supporting me, giving me advice, and somehow always knowing when something was wrong. You’ve seen every version of me and still stayed by my side.</p>
+                
+                <p>We may fight over the stupidest things, but at the end of the day, you’ll always be my sister and one of the people I can count on. No matter where life takes us, you’ll always have a person in your corner. That’s me. ❤️</p>
+
+                <div class="image-cluster">
+                    <div class="cluster-top">
+                        <img src="letter-img1.jpg" class="cluster-img img-1" alt="flowers">
+                        <img src="letter-img2.jpg" class="cluster-img img-2" alt="tulips">
+                    </div>
+                    <img src="letter-img3.jpg" class="cluster-img img-3" alt="frog">
+                </div>
+
+                <p class="sign-off">always in your corner,</p>
+                <p class="signature">Om</p>
+            </div>
+            
+            <img src="tiny-cat.png" class="tiny-cat" alt="cat">
+        </div>
+
+        <!-- Play Again Button -->
+        <button class="play-again-btn" onclick="restartJourney()">play again ↺</button>
+
+    </div>
+
+    <div class="music-player" onclick="toggleMusic(event)">
+        <div class="play-btn" id="playBtnIcon">▶</div>
+        Our Song <span style="color: #ff9a00; font-size: 14px;">ılıı.</span>
+    </div>
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <script>
+        const music = document.getElementById("bg-music");
+        const playBtn = document.getElementById("playBtnIcon");
+        let isPlaying = false;
+
+        window.onload = function() {
+            const savedTime = sessionStorage.getItem("savedMusicTime");
+            const wasPlaying = sessionStorage.getItem("isMusicPlaying");
+
+            if (savedTime !== null) {
+                music.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = "||";
+                    playBtn.style.paddingLeft = "0px";
+                }).catch((error) => {
+                    isPlaying = false;
+                    playBtn.innerHTML = "▶";
+                });
+            }
+        };
+
+        function toggleMusic(event) {
+            event.stopPropagation();
+            if(isPlaying) {
+                music.pause(); 
+                playBtn.innerHTML = "▶"; 
+                playBtn.style.paddingLeft = "2px";
+            } else {
+                music.play(); 
+                playBtn.innerHTML = "||"; 
+                playBtn.style.paddingLeft = "0px";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Restart function
+        function restartJourney() {
+            sessionStorage.clear(); // Yeh memory aur gaane ka time clear kar dega
+            window.location.href = "index.html"; // Wapas first page par
+        }
+    </script>
+</body>
+</html>

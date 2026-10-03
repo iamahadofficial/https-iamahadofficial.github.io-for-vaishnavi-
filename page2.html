@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Vaishnavi ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html {
+            height: 100%; width: 100%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; overflow: hidden;
+            background-color: #eaf8f5;
+            background-image: linear-gradient(#d1ebe6 1px, transparent 1px), linear-gradient(90deg, #d1ebe6 1px, transparent 1px);
+            background-size: 50px 50px; background-position: center center;
+            font-family: 'Caveat', cursive;
+        }
+
+        .mail-container {
+            position: relative; width: 90vw; max-width: 380px; height: 250px;
+            margin-top: 120px; transform: translateY(100vh);
+            animation: slideUpEnvelope 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; z-index: 10;
+        }
+        .envelope-back {
+            position: absolute; bottom: 0; width: 100%; height: 100%;
+            background-color: #90c8c0; border-radius: 10px; border: 2px solid #5a8d87; z-index: 1;
+        }
+        .letter {
+            position: absolute; bottom: 10px; left: 5%; width: 90%; height: 250px;
+            background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 2; padding: 20px 15px; text-align: center;
+            transform: translateY(0); animation: slideOutLetter 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; animation-delay: 1.5s;
+        }
+        .envelope-front { position: absolute; bottom: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+        .envelope-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(150deg, rgba(162,210,202,1) 0%, rgba(162,210,202,1) 49%, transparent 50%);
+            border-radius: 0 0 10px 10px; border: 2px solid #5a8d87; border-top: none;
+        }
+        .envelope-overlay-2 {
+            position: absolute; bottom: 0; right: 0; width: 100%; height: 100%;
+            background: linear-gradient(-150deg, rgba(175,219,212,1) 0%, rgba(175,219,212,1) 49%, transparent 50%);
+            border-radius: 0 0 10px 10px; border-right: 2px solid #5a8d87; border-bottom: 2px solid #5a8d87;
+        }
+        .stamp {
+            position: absolute; bottom: 30px; left: 20px; border: 2px dashed #1a3c40; color: #1a3c40;
+            font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; padding: 4px 8px;
+            transform: rotate(-10deg); background: rgba(255,255,255,0.2); border-radius: 4px;
+        }
+        .heart-seal {
+            position: absolute; bottom: 45px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px;
+            background-color: #ff9a00; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            border: 3px solid white; color: white; font-size: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .text-line { color: #1a3c40; margin-bottom: 8px; font-size: 22px; min-height: 28px; display: block; }
+        .line-1 { font-size: 30px; font-weight: 700; margin-bottom: 12px; }
+        .line-4 { color: #157a6e; font-weight: 600; margin-top: 15px; }
+        .little-heart { color: #ffb347; position: absolute; font-size: 16px; }
+        .lh-1 { top: 15px; left: 15px; }
+        .lh-2 { top: 15px; right: 15px; }
+        .tap-text {
+            font-family: 'Montserrat', sans-serif; color: #5a8d87; font-size: 12px; letter-spacing: 3px;
+            margin-top: 40px; opacity: 0; transition: opacity 1s ease; cursor: pointer; z-index: 20;
+        }
+        .music-player {
+            position: fixed; bottom: 20px; right: 20px; background: white; padding: 8px 15px; border-radius: 30px;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #1a3c40; z-index: 20; cursor: pointer;
+        }
+        .play-btn {
+            background-color: #00a896; color: white; width: 28px; height: 28px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 12px; padding-left: 2px;
+        }
+
+        @keyframes slideUpEnvelope { 0% { transform: translateY(100vh); } 100% { transform: translateY(0); } }
+        @keyframes slideOutLetter { 0% { transform: translateY(0); } 100% { transform: translateY(-210px); } }
+        @media (max-height: 700px) {
+            .mail-container { transform: scale(0.85); margin-top: 80px; }
+            @keyframes slideOutLetter { 0% { transform: translateY(0); } 100% { transform: translateY(-190px); } }
+        }
+    </style>
+</head>
+<body onclick="goToNextPage(event)">
+
+    <div class="mail-container">
+        <div class="envelope-back"></div>
+        <div class="letter">
+            <span class="little-heart lh-1">❤</span>
+            <span class="little-heart lh-2">❤</span>
+            <div id="text1" class="text-line line-1"></div>
+            <div id="text2" class="text-line"></div>
+            <div id="text3" class="text-line"></div>
+            <div id="text4" class="text-line line-4"></div>
+        </div>
+        <div class="envelope-front">
+            <div class="envelope-overlay"></div>
+            <div class="envelope-overlay-2"></div>
+            <div class="stamp">HAPPY BIRTHDAY VAISHNAVI</div>
+            <div class="heart-seal">❤</div>
+        </div>
+    </div>
+
+    <div class="tap-text" id="tapText">TAP ANYWHERE TO BEGIN</div>
+
+    <div class="music-player" onclick="toggleMusic(event)">
+        <div class="play-btn" id="playBtnIcon">▶</div>
+        Our Song <span style="color: #ff9a00; font-size: 14px;">ılıı.</span>
+    </div>
+
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <script>
+        // Typing Effect Texts
+        const lines = [
+            { id: "text1", text: "Hey Vaishnavi!" },
+            { id: "text2", text: "I made a little something" },
+            { id: "text3", text: "just for you..." },
+            { id: "text4", text: "happy birthday vaishnavi✿" }
+        ];
+
+        let lineIndex = 0; let charIndex = 0; let isTypingDone = false;
+
+        function typeWriter() {
+            if (lineIndex < lines.length) {
+                let currentLine = lines[lineIndex];
+                if (charIndex < currentLine.text.length) {
+                    document.getElementById(currentLine.id).innerHTML += currentLine.text.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 50); 
+                } else {
+                    lineIndex++; charIndex = 0; setTimeout(typeWriter, 400); 
+                }
+            } else {
+                setTimeout(() => { document.getElementById("tapText").style.opacity = 1; isTypingDone = true; }, 500);
+            }
+        }
+        setTimeout(typeWriter, 3000);
+
+        // Music Player Variables
+        const music = document.getElementById("bg-music");
+        const playBtn = document.getElementById("playBtnIcon");
+        let isPlaying = false;
+
+        // Yahan par hum index.html ka bheja hua time aur play status receive kar rahe hain
+        window.onload = function() {
+            const savedTime = sessionStorage.getItem("savedMusicTime");
+            const wasPlaying = sessionStorage.getItem("isMusicPlaying");
+
+            if (savedTime !== null) {
+                music.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = "||";
+                    playBtn.style.paddingLeft = "0px";
+                }).catch((error) => {
+                    isPlaying = false;
+                    playBtn.innerHTML = "▶";
+                });
+            }
+        };
+
+        function toggleMusic(event) {
+            event.stopPropagation();
+            if(isPlaying) {
+                music.pause(); 
+                playBtn.innerHTML = "▶"; 
+                playBtn.style.paddingLeft = "2px";
+            } else {
+                music.play(); 
+                playBtn.innerHTML = "||"; 
+                playBtn.style.paddingLeft = "0px";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function goToNextPage(event) {
+            if (isTypingDone || lineIndex > 1) {
+                // Page 3 ke liye wapas time save kar rahe hain
+                sessionStorage.setItem("savedMusicTime", music.currentTime);
+                sessionStorage.setItem("isMusicPlaying", !music.paused);
+                window.location.href = "page3.html"; 
+            }
+        }
+    </script>
+</body>
+</html>

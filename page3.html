@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Vaishnavi ❤️</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #eaf8f5;
+            background-image: linear-gradient(#d1ebe6 1px, transparent 1px), linear-gradient(90deg, #d1ebe6 1px, transparent 1px);
+            background-size: 50px 50px; background-position: center top;
+            font-family: 'Montserrat', sans-serif; color: #1a3c40; display: flex; justify-content: center; overflow-x: hidden;
+        }
+        .main-container { width: 100%; max-width: 450px; padding: 40px 20px 100px 20px; display: flex; flex-direction: column; align-items: center; }
+
+        .top-tag { color: #ff7f50; font-size: 11px; letter-spacing: 2px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: 32px; color: #1a3c40; margin-bottom: -5px; text-align: center; z-index: 2; }
+        .ribbon {
+            background-color: #009688; color: white; font-family: 'Caveat', cursive; font-size: 20px;
+            padding: 6px 25px; margin-bottom: 30px; clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%); z-index: 1;
+        }
+
+        .photo-wrapper { position: relative; width: 90%; margin-bottom: 30px; transform: rotate(-2deg); }
+        .polaroid { background: white; padding: 12px; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .polaroid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; display: block; }
+        .tape { position: absolute; width: 70px; height: 22px; background-color: rgba(144, 219, 203, 0.8); z-index: 5; }
+        .tape-tl { top: -10px; left: -20px; transform: rotate(-35deg); }
+        .tape-br { bottom: -10px; right: -20px; transform: rotate(-35deg); }
+
+        .message-card { background: white; padding: 25px 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; width: 100%; }
+        .message-card p { color: #5a6a72; font-size: 14px; line-height: 1.7; margin-bottom: 15px; font-weight: 500; }
+        .flower-icon { font-size: 20px; color: #009688; }
+
+        .thumbnails { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; }
+        .thumbnails img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; background: white; padding: 4px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+
+        .music-card { background: white; width: 100%; border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .album-art { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; }
+        .music-info { flex-grow: 1; }
+        .now-playing-text { color: #ff7f50; font-size: 9px; font-weight: 700; letter-spacing: 1px; margin-bottom: 3px; }
+        .song-title { font-family: 'Playfair Display', serif; font-size: 18px; color: #1a3c40; font-weight: 700; margin-bottom: 2px; }
+        .song-sub { font-size: 11px; color: #8899a6; margin-bottom: 10px; }
+        .controls { display: flex; align-items: center; gap: 10px; }
+        .play-btn-main { background-color: #009688; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 10px; cursor: pointer; }
+        
+        .progress-slider {
+            -webkit-appearance: none; width: 100%; flex-grow: 1; height: 4px; background: #e0ecea;
+            border-radius: 2px; outline: none; cursor: pointer;
+        }
+        .progress-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 12px; height: 12px;
+            border-radius: 50%; background: #009688; cursor: pointer;
+        }
+        .time-text { font-size: 10px; color: #8899a6; font-weight: 600; min-width: 50px; text-align: right; }
+
+        .footer-text { font-family: 'Caveat', cursive; color: #5a8d87; font-size: 20px; text-align: center; display: flex; align-items: center; gap: 8px; padding: 0 10px; justify-content: center; margin-bottom: 25px; }
+
+        /* Naya Button jo Page 4 par le jayega */
+        .next-btn {
+            background-color: #009688; color: white; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; font-weight: 600; padding: 15px 30px; border: none;
+            border-radius: 30px; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 150, 136, 0.3);
+            transition: transform 0.2s; width: 80%; max-width: 250px; text-align: center;
+        }
+        .next-btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="top-tag">✦ HAPPY birthday Vaishnavi</div>
+        <h1 class="main-title">To My Favourite Sister </h1>
+        <div class="ribbon">to the best one ✿</div>
+
+        <div class="photo-wrapper">
+            <div class="tape tape-tl"></div>
+            <div class="tape tape-br"></div>
+            <div class="polaroid">
+                <img src="prachi-main.jpg" alt="My Favourite Person">
+            </div>
+        </div>
+
+        <div class="message-card">
+            <p>Every year this day comes around and I think the same thing: I got so lucky with you. So instead of a text this time, I built you a tiny corner of the internet. Stay a while, there's a bit to see.</p>
+            <div class="flower-icon">✿</div>
+        </div>
+
+        <div class="thumbnails">
+            <img src="small1.jpg" alt="cute 1">
+            <img src="small2.jpg" alt="cute 2">
+            <img src="small3.jpg" alt="cute 3">
+        </div>
+
+        <div class="music-card">
+            <img src="album-art.jpg" alt="Album Art" class="album-art">
+            <div class="music-info">
+                <div class="now-playing-text">NOW PLAYING</div>
+                <div class="song-title">Song</div>
+                <div class="song-sub">the one Song</div>
+                
+                <div class="controls">
+                    <button class="play-btn-main" id="mainPlayBtn" onclick="toggleMainMusic()">▶</button>
+                    <input type="range" class="progress-slider" id="progressBar" min="0" max="100" value="0">
+                    <div class="time-text" id="timeText">0:00 / 0:00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            ✿ press play - this one is permanently attached to memories of you...
+        </div>
+
+        <!-- Yahan naya button laga diya hai -->
+        <button class="next-btn" onclick="goToNextPage()">go to memory wall →</button>
+    </div>
+
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <script>
+        const music = document.getElementById("bg-music");
+        const playBtn = document.getElementById("mainPlayBtn");
+        const progressBar = document.getElementById("progressBar");
+        const timeText = document.getElementById("timeText");
+        
+        let isPlaying = false;
+
+        window.onload = function() {
+            const savedTime = sessionStorage.getItem("savedMusicTime");
+            const wasPlaying = sessionStorage.getItem("isMusicPlaying");
+
+            if (savedTime !== null) {
+                music.currentTime = parseFloat(savedTime); 
+            }
+
+            if (wasPlaying === "true") {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = "||";
+                }).catch((error) => {
+                    isPlaying = false;
+                    playBtn.innerHTML = "▶";
+                });
+            }
+        };
+
+        function toggleMainMusic() {
+            if(isPlaying) {
+                music.pause();
+                playBtn.innerHTML = "▶";
+            } else {
+                music.play();
+                playBtn.innerHTML = "||";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        music.addEventListener('timeupdate', () => {
+            const currentTime = music.currentTime;
+            const duration = music.duration;
+            
+            if (duration) {
+                const progressPercent = (currentTime / duration) * 100;
+                progressBar.value = progressPercent;
+                
+                progressBar.style.background = `linear-gradient(to right, #009688 ${progressPercent}%, #e0ecea ${progressPercent}%)`;
+                
+                let currentMin = Math.floor(currentTime / 60);
+                let currentSec = Math.floor(currentTime % 60);
+                let durMin = Math.floor(duration / 60);
+                let durSec = Math.floor(duration % 60);
+                
+                if(currentSec < 10) currentSec = "0" + currentSec;
+                if(durSec < 10) durSec = "0" + durSec;
+                
+                timeText.innerText = currentMin + ":" + currentSec + " / " + durMin + ":" + durSec;
+            }
+        });
+
+        progressBar.addEventListener('input', () => {
+            const seekTo = (progressBar.value / 100) * music.duration;
+            music.currentTime = seekTo;
+        });
+
+        // Naya function jo Page 4 par le jayega aur music save karega
+        function goToNextPage() {
+            sessionStorage.setItem("savedMusicTime", music.currentTime);
+            sessionStorage.setItem("isMusicPlaying", !music.paused);
+            window.location.href = "page4.html"; 
+        }
+    </script>
+</body>
+</html>
